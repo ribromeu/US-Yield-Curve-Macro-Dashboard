@@ -1,0 +1,98 @@
+# ──────────────────────────────────────────────────────────────────
+# .github/workflows/yield_curve_daily.yml
+#
+# WHAT IT DOES: runs the yield curve dashboard every weekday at
+# 14:00 UTC (10:00 AM Eastern) — after FRED updates daily data.
+# Sends daily report + urgent alert if thresholds are breached.
+#
+# REQUIRED GITHUB SECRETS (Settings → Secrets → Actions):
+#   FRED_API_KEY   : your FRED API key (fred.stlouisfed.org)
+#   GMAIL_USER     : sender Gmail address
+#   GMAIL_APP_PASS : 16-char Gmail App Password (no spaces)
+#   ALERT_TO       : recipient email (comma-separated for multiple)
+#
+# HOW TO SET UP:
+#   1. Push this file to your repo at .github/workflows/
+#   2. Add the 4 secrets above in GitHub repo Settings
+#   3. The workflow triggers automatically Mon–Fri at 14:00 UTC
+#   4. You can also trigger it manually via Actions → Run workflow
+#
+# ARTIFACTS: the 3 PNG dashboards are uploaded as GitHub artifacts
+# (retained 7 days) so you can download them from the Actions tab.
+# ──────────────────────────────────────────────────────────────────
+
+name: Yield Curve Daily Monitor
+
+on:
+  schedule:
+    # Every weekday (Mon–Fri) at 14:00 UTC = 10:00 AM Eastern
+    # FRED typically publishes daily data by ~12:00 PM Eastern
+    - cron: "0 14 * * 1-5"
+
+  # Allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  run-dashboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+
+      # ── 1. Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Set up Python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # ── 3. Cache pip dependencies (speeds up subsequent runs)
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      # ── 4. Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install \
+            pandas numpy matplotlib scipy requests \
+            python-dotenv openpyxl xlrd plotly
+      # ── 5. Run the dashboard + email system
+      #       Environment variables are injected from GitHub Secrets
+      - name: Run yield curve dashboard
+        env:
+          FRED_API_KEY:   ${{ secrets.FRED_API_KEY }}
+          GMAIL_USER:     ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
+          ALERT_TO:       ${{ secrets.ALERT_TO }}
+          # Disable interactive matplotlib display in headless CI
+          MPLBACKEND: Agg
+        run: |
+          python yield_curve_dashboard.py
+      # ── 6. Upload PNG dashboards as artifacts (7-day retention)
+      - name: Upload dashboard PNGs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yield-curve-dashboards-${{ github.run_id }}
+          path: |
+            yield_curve_dashboard.png
+            yield_curve_economic.png
+            yield_curve_historical.png
+          retention-days: 7
+
+      # ── 7. Upload Excel data store
+      - name: Upload Excel data store
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: yield-curve-history-${{ github.run_id }}
+          path: yield_curve_history.xlsx
+          retention-days: 30
