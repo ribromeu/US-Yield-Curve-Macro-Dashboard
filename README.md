@@ -1,5 +1,12 @@
 # US Yield Curve Macro Dashboard
 
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=github-actions&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-pytest-brightgreen?logo=pytest&logoColor=white)
+![FRED API](https://img.shields.io/badge/Data-FRED%20API-red)
+![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-lightgrey)
+
 A Python framework that monitors the US Treasury yield curve daily, estimates recession probability using the NY Fed probit model, and delivers automated email alerts via GitHub Actions.
 
 Built as a personal quant project at the intersection of fixed-income research, macro analysis, and software engineering.
