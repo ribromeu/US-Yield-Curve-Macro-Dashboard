@@ -1,0 +1,24 @@
+# Environment variables
+.env
+
+# Generated outputs
+output/
+*.png
+
+# Persisted data
+data/
+*.xlsx
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
