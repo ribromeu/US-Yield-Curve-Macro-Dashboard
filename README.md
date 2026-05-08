@@ -25,20 +25,17 @@ Every time it runs, the system:
 
 **Main dashboard** — current yield curve vs three historical crisis snapshots, 10Y-2Y spread history with NBER recession bands, NY Fed recession probability, and a current metrics table.
 
-![Main Dashboard](<img width="2591" height="1770" alt="yield_curve_dashboard" src="https://github.com/user-attachments/assets/cad9adce-ac80-40c9-b5db-98b97162aeae" />
-)
+<img width="2591" height="1770" alt="yield_curve_dashboard" src="https://github.com/user-attachments/assets/cad9adce-ac80-40c9-b5db-98b97162aeae" />
+
 
 **Economic analysis** — implied forward rates, univariate vs multivariate probit comparison, and monetary regime classification with colored FFR background.
 
-![Economic Dashboard](<img width="3125" height="1191" alt="yield_curve_economic" src="https://github.com/user-attachments/assets/ebd3301d-a87c-447f-b98c-0868832a1a0e" />
+<img width="3125" height="1191" alt="yield_curve_economic" src="https://github.com/user-attachments/assets/ebd3301d-a87c-447f-b98c-0868832a1a0e" />
 
-)
 
 **Historical evolution** — key maturity rates over time, yield curve heatmap (monthly), static 3D surface (quarterly), and a snapshot history from every previous run.
-![Historical Dashboard](<img width="2898" height="2059" alt="yield_curve_historical" src="https://github.com/user-attachments/assets/15bf167b-417a-452e-b5bc-99843dccc2c9" />
+<img width="2898" height="2059" alt="yield_curve_historical" src="https://github.com/user-attachments/assets/f6b85c0e-008c-408f-8f91-b03dd6c3b012" />
 
-
-)
 
 ---
 
