@@ -174,6 +174,6 @@ Go to Actions → Yield Curve Daily Monitor → Run workflow. The workflow is co
 
 ## Background
 
-I built this during my BS Economics program (minors in Finance and Data Analysis) as a way to apply fixed-income theory, econometric modeling, and software engineering to a real monitoring problem. The yield curve is one of the most empirically robust leading indicators in macroeconomics — every US recession since 1955 was preceded by an inversion — but the raw signal needs context: term premium decomposition, credit conditions, monetary regime, and international flows all affect how the same spread reading should be interpreted.
+I built this during my BS Economics program (minors in Finance and Data Analysis) as a way to apply fixed-income theory, econometric modeling, and software engineering to a real monitoring problem. The yield curve is one of the most empirically robust leading indicators in macroeconomics ( every US recession since 1955 was preceded by an inversion ) but the raw signal needs context: term premium decomposition, credit conditions, monetary regime, and international flows all affect how the same spread reading should be interpreted.
 
 The goal was to build something rigorous enough to use as an actual analytical tool, not just a class project.
