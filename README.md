@@ -171,6 +171,11 @@ Go to Actions → Yield Curve Daily Monitor → Run workflow. The workflow is co
 | Excess bond premium | Gilchrist & Zakrajšek (2012) |
 
 ---
+## AI Attribution
+
+This project was developed with the assistance of [Claude](https://www.anthropic.com/claude) (Anthropic). Claude was used to support code organization, improve code structure and readability, and enhance overall efficiency of the implementation.
+
+---
 
 ## Background
 
